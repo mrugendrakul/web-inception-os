@@ -1,4 +1,4 @@
-import { Activity, useLayoutEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
+import { Activity, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import './AppWindow.css'
 import type { WindowState } from './Types'
 
@@ -22,7 +22,7 @@ type WindowSize = {
     height: number,
 }
 
-const AppWindowNR = ({ children, title, isActive, icon, onActive, windowState }: AppWindowNRProps) => {
+const AppWindowNR = ({ children, title, isActive, icon, onActive, windowState, onMinimise, onClose }: AppWindowNRProps) => {
     const [windowPosition, setWindowPosition] = useState<WindowPosition>({
         x: 20,
         y: 80,
@@ -209,14 +209,41 @@ const AppWindowNR = ({ children, title, isActive, icon, onActive, windowState }:
 
                 <div
                     className={`app-title ${isStateDraggin ? 'grabing' : 'grab'}`}
-                    onPointerDown={handlePointerDown}
-                    onPointerUp={handlePointerUp}
-                    onPointerMove={handlePointerMove}
-                    onPointerLeave={handlePointerUp}
-                >
-                    {icon !== "" && <img src={icon} width={24} height={24} />}
-                    <p className='app-title-name'>{title}</p>
 
+                >
+                    <div
+                        className='drag-window'
+                        onPointerDown={handlePointerDown}
+                        onPointerUp={handlePointerUp}
+                        onPointerMove={handlePointerMove}
+                        onPointerLeave={handlePointerUp}
+                    >
+                        {icon !== "" && <img src={icon} width={24} height={24} />}
+                        <p className='app-title-name'>{title}</p>
+                        <div style={{ flexGrow: 1 }}></div>
+                    </div>
+                    <div className='window-buttons'>
+                        <button
+                            className='window-button minimise'
+                            onClick={
+                                () => {
+                                    console.log("onMInimize")
+                                    onMinimise()
+                                }
+                            }
+                        >
+                            -
+                        </button>
+                        <button
+                            className='window-button close'
+                            onClick={() => {
+                                console.log("ON close")
+                                onClose()
+                            }}
+                        >
+                            x
+                        </button>
+                    </div>
                 </div>
                 <div className='app-body'>
                     {children}

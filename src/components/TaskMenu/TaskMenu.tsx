@@ -23,6 +23,7 @@ const TaskMenu = ({ onClose }: TaskMenuProps): ReactNode => {
                                 key={id}
                                 className='menu-button'
                                 onClick={() => {
+                                    onClose()
                                     addWindow({
                                         id: id,
                                         name: app.name,
