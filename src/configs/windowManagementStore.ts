@@ -1,5 +1,6 @@
 import type { ActiveWindow, WindowState } from '@components/WindowManager/Types'
 import { create } from 'zustand'
+import type { StoreApp } from './osAppStore'
 
 export interface taskbarItem {
     id: number,
@@ -9,7 +10,7 @@ export interface taskbarItem {
 
 interface WindowMangementStore {
     activeWindows: ActiveWindow[],
-    addWindow: (win: ActiveWindow) => void,
+    addWindow: (win: StoreApp) => void,
     removeWindow: (id: string) => void,
     setActiveWindow: (id: string) => void,
     setWindowState: (id: string, winState: WindowState) => void,
@@ -20,7 +21,17 @@ export const useWindowManagementStore = create<WindowMangementStore>((set) => ({
     addWindow: (win) => set(state => {
         const randomId = Math.random()*10000
         const updatedWindows: ActiveWindow[] = state.activeWindows.map(windo => ({ ...windo, active: false }))
-        return { activeWindows: [...updatedWindows, { ...win,id:`${randomId}`, active: true }] }
+        console.log("Adding app ",win)
+        return { activeWindows: [...updatedWindows, { 
+            id:`${randomId}`,
+            name:win.name,
+            icon:win.icon,
+            active:true,
+            windowState:'maximised',
+            iframeUrl:win.endPoint??"",
+            isSystem:win.isSystemApp,
+            systemComponent:win.systemComponent,
+        }] }
     }),
     removeWindow:(id)=>set(state=>({
         activeWindows:state.activeWindows.filter(window=>window.id !==id)

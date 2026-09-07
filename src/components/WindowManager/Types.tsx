@@ -1,3 +1,5 @@
+import type { ReactNode } from "react"
+
 export type WindowState = "minimised"|"maximised"
 
 export type ActiveWindow={
@@ -7,4 +9,6 @@ export type ActiveWindow={
     active:boolean,
     windowState:WindowState,
     iframeUrl?:string,
+    isSystem?:boolean,
+    systemComponent:ReactNode
 }

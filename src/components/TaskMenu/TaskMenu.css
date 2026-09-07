@@ -4,7 +4,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    /* background: rgba(244, 244, 244, 0.3); */
     z-index: 999;
 
     display: flex;
@@ -24,7 +23,9 @@
         background: var(--taskbar-bg);
         backdrop-filter: blur(20px);
         box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        border: 0.4px solid rgba(210, 205, 205, 0.622);
         border-radius: 20px;
+        transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, transform 0.2s ease-in-out;;
 
         #task-menu-grid {
             display: grid;
@@ -45,7 +46,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            .menu-btn-img{
+
+            .menu-btn-img {
                 width: 4rem;
             }
         }
@@ -56,6 +58,29 @@
 
         .menu-button:active {
             background: rgb(128, 91, 91);
+        }
+    }
+
+    .menu-visible {
+        /* transform: translateY(0); */
+        animation: slideUpFadeIn 0.2s ease-out forwards;
+    }
+
+    .menu-hidden {
+        opacity: 0px;
+        visibility: hidden;
+        pointer-events: none;
+        transform:translateY(150%)
+    }
+
+    @keyframes slideUpFadeIn {
+        0%{
+            transform: translateY(150%);
+            /* opacity:0; */
+        }
+        100%{
+            transform: translateY(0);
+            opacity: 1;
         }
     }
 }

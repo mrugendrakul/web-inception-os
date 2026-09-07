@@ -16,7 +16,10 @@ const DesktopWindowContainer = () => {
         onMinimise={() => setWindowState(window.id, 'minimised')}
         onClose={() => { removeWindow(window.id) }}
         windowState={window.windowState}
-      >Something will here</AppWindowNR>))}</div>
+      >{window.isSystem ? window.systemComponent : 
+      "not system"
+      }
+      </AppWindowNR>))}</div>
   )
 }
 

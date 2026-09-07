@@ -6,7 +6,7 @@ import TaskMenu from './components/TaskMenu/TaskMenu'
 import DesktopWindowContainer from '@components/WindowManager/DesktopWindowContainer'
 
 function App() {
-  const [tastMenuOpen,setTaskMenuOpen] = useState<Boolean>(false)
+  const [tastMenuOpen,setTaskMenuOpen] = useState<boolean>(false)
 
   useEffect(() => {
     console.log("the config apps link", import.meta.env.VITE_CUSTOM_FILE_EXPLORER)
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <DesktopLayout onMenuOpen={()=>setTaskMenuOpen(!tastMenuOpen)}>
-      {tastMenuOpen && <TaskMenu onClose={onClose}/>}
+      <TaskMenu menuVisible={tastMenuOpen} onClose={onClose}/>
       <DesktopWindowContainer/>
     </DesktopLayout>
   )
