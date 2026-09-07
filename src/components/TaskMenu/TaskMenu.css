@@ -72,15 +72,4 @@
         pointer-events: none;
         transform:translateY(150%)
     }
-
-    @keyframes slideUpFadeIn {
-        0%{
-            transform: translateY(150%);
-            /* opacity:0; */
-        }
-        100%{
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
 }
